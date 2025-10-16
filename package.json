@@ -1,0 +1,29 @@
+{
+  "name": "chutes-claude-proxy",
+  "version": "1.0.0",
+  "description": "A simple proxy server to use Chutes GLM models with Claude Code CLI",
+  "type": "module",
+  "main": "src/proxy.js",
+  "scripts": {
+    "start": "node src/proxy.js",
+    "dev": "node src/proxy.js"
+  },
+  "keywords": [
+    "claude-code",
+    "chutes",
+    "proxy",
+    "glm",
+    "streaming"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2",
+    "node-fetch": "^3.3.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
