@@ -1,22 +1,35 @@
 {
-  "name": "chutes-claude-proxy",
+  "name": "anthropic-openai-proxy",
   "version": "1.0.0",
-  "description": "A simple proxy server to use Chutes GLM models with Claude Code CLI",
+  "description": "Format conversion proxy enabling Claude Code CLI to work with Chutes GLM models including full tool calling support",
   "type": "module",
-  "main": "src/proxy.js",
+  "main": "src/anthropic-proxy.js",
   "scripts": {
     "start": "node src/proxy.js",
-    "dev": "node src/proxy.js"
+    "dev": "node src/proxy.js",
+    "proxy": "node src/anthropic-proxy.js",
+    "proxy:debug": "DEBUG=true node src/anthropic-proxy.js",
+    "test:tools": "node test-tool-calling.js"
   },
   "keywords": [
     "claude-code",
     "chutes",
     "proxy",
     "glm",
-    "streaming"
+    "anthropic",
+    "openai",
+    "format-conversion",
+    "tool-calling",
+    "streaming",
+    "ai",
+    "llm"
   ],
-  "author": "",
+  "author": "Saradhi",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/anthropic-openai-proxy"
+  },
   "dependencies": {
     "express": "^4.19.2",
     "node-fetch": "^3.3.2",
