@@ -297,8 +297,14 @@ app.post("/v1/messages", async (req, res) => {
   }
 });
 
+// Animation helper function
+async function printWithDelay(text, delay = 50) {
+  process.stdout.write(text);
+  await new Promise(resolve => setTimeout(resolve, delay));
+}
+
 // Start server
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   const banner = `
 ╔═══════════════════════════════════════════════════════════════╗
 ║                                                               ║
