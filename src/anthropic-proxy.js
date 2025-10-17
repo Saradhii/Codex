@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import express from "express";
 import fetch from "node-fetch";
 import cors from "cors";
@@ -6,15 +8,56 @@ import { anthropicToOpenAI, openAIToAnthropic, openAIStreamToAnthropic } from ".
 
 dotenv.config();
 
+// Parse CLI arguments
+const args = process.argv.slice(2);
+let cliDebug = false;
+let cliPort = null;
+
+for (let i = 0; i < args.length; i++) {
+  const arg = args[i];
+  if (arg === '--debug' || arg === '-d') {
+    cliDebug = true;
+  } else if (arg === '--port' || arg === '-p') {
+    cliPort = parseInt(args[++i]);
+  } else if (arg === '--help' || arg === '-h') {
+    console.log(`
+Codex Proxy - Claude Code to Chutes GLM Format Conversion Proxy
+
+Usage:
+  codex-proxy [options]
+
+Options:
+  --debug, -d        Enable debug logging (verbose output)
+  --port, -p <port>  Set proxy server port (default: 3333)
+  --help, -h         Show this help message
+
+Examples:
+  codex-proxy                    Start proxy on default port 3333
+  codex-proxy --debug            Start with debug logging enabled
+  codex-proxy --port 4000        Start on port 4000
+  codex-proxy -p 4000 -d         Start on port 4000 with debug logging
+
+Configure Claude Code:
+  export ANTHROPIC_AUTH_TOKEN="dummy"
+  export ANTHROPIC_BASE_URL="http://localhost:3333"
+  claude
+
+For more info: https://github.com/yourusername/codex-proxy
+`);
+    process.exit(0);
+  }
+}
+
 const app = express();
 app.use(express.json({ limit: '50mb' }));
 app.use(cors());
 
-// Configuration
+// Configuration with hardcoded defaults (can be overridden by environment variables)
+const CHUTES_API_TOKEN = process.env.CHUTES_API_TOKEN || "cpk_f3594e7f33e34d7f838548efa1a6cd23.fe615caf1963556da89d0cf539a5595a.E1idJbvD2s1V7C1yPF8tdySXPIvZEg1e";
 const CHUTES_API_URL = process.env.CHUTES_API_URL || "https://llm.chutes.ai/v1/chat/completions";
 const CHUTES_MODEL = process.env.CHUTES_MODEL || "zai-org/GLM-4.5-Air";
-const PORT = process.env.PORT || 3333;
-const DEBUG = process.env.DEBUG === 'true';
+const PORT = cliPort || parseInt(process.env.PORT) || 3333;
+const DEBUG = cliDebug || process.env.DEBUG === 'true';
 
 // Logging utilities
 const colors = {
@@ -150,7 +193,7 @@ app.post("/v1/messages", async (req, res) => {
     const chutesResponse = await fetch(CHUTES_API_URL, {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${process.env.CHUTES_API_TOKEN}`,
+        "Authorization": `Bearer ${CHUTES_API_TOKEN}`,
         "Content-Type": "application/json",
         "Accept": anthropicRequest.stream ? "text/event-stream" : "application/json"
       },
@@ -282,11 +325,11 @@ ${colors.bright}To use with Claude Code:${colors.reset}
   ${colors.cyan}export ANTHROPIC_BASE_URL="http://localhost:${PORT}"${colors.reset}
   ${colors.cyan}claude${colors.reset}
 
-${colors.bright}Environment Variables:${colors.reset}
-  CHUTES_API_TOKEN   ✓ ${process.env.CHUTES_API_TOKEN ? colors.green + 'Set' : colors.red + 'Missing'}${colors.reset}
-  CHUTES_API_URL     ✓ ${colors.green}Set${colors.reset}
-  CHUTES_MODEL       ✓ ${colors.green}Set${colors.reset}
-  PORT               ✓ ${colors.green}Set${colors.reset}
+${colors.bright}Configuration:${colors.reset}
+  CHUTES_API_TOKEN   ✓ ${colors.green}Configured${colors.reset}
+  CHUTES_API_URL     ✓ ${colors.green}${CHUTES_API_URL}${colors.reset}
+  CHUTES_MODEL       ✓ ${colors.green}${CHUTES_MODEL}${colors.reset}
+  PORT               ✓ ${colors.green}${PORT}${colors.reset}
   DEBUG              ✓ ${DEBUG ? colors.green + 'Enabled' : colors.yellow + 'Disabled'}${colors.reset}
 
 ${colors.bright}Logs:${colors.reset}
@@ -297,13 +340,16 @@ ${colors.bright}Logs:${colors.reset}
   ❌ Red     = Errors
   🌊 Cyan    = Streaming
 
+${colors.dim}Built by:${colors.reset}
+${colors.cyan}${colors.bright}                                 .___.__    .__
+ ___________ ____________     __| _/|  |__ |__|
+/  ___/\\__  \\_  __ \\__  \\   / __ | |  |  \\|  |
+\\___ \\  / __ \\|  | \\// __ \\_/ /_/ | |   Y  \\  |
+/____  >(____  /__|  (____  /\\____ | |___|  /__|
+     \\/      \\/           \\/      \\/      \\/    ${colors.reset}
+
 ${colors.green}${colors.bright}✨ Server ready! Waiting for requests...${colors.reset}
 `;
 
   console.log(banner);
-
-  if (!process.env.CHUTES_API_TOKEN) {
-    log('WARN', '⚠️  CHUTES_API_TOKEN not set! Proxy will not work without it.');
-    log('WARN', 'Add CHUTES_API_TOKEN to your .env file');
-  }
 });

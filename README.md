@@ -1,4 +1,4 @@
-# Anthropic-OpenAI Proxy for Chutes GLM
+# Codex Proxy - Claude Code to Chutes GLM
 
 A format conversion proxy server that enables using **Chutes GLM models with Claude Code CLI** including **full tool calling support**.
 
@@ -15,7 +15,38 @@ This proxy acts as a bridge between Claude Code and the Chutes GLM-4.5-Air model
 
 **Result**: Use Claude Code with FREE Chutes GLM models with full functionality!
 
-## Setup
+---
+
+## Quick Start (NPM Installation)
+
+**3 simple steps to get started:**
+
+### 1. Install globally via npm
+```bash
+npm install -g codex-proxy
+```
+
+### 2. Start the proxy
+```bash
+codex-proxy              # Normal mode
+codex-proxy --debug      # Debug mode (verbose logging)
+codex-proxy --port 4000  # Custom port
+codex-proxy --help       # Show all options
+```
+
+### 3. Configure Claude Code
+In a **new terminal**:
+```bash
+export ANTHROPIC_AUTH_TOKEN="dummy"
+export ANTHROPIC_BASE_URL="http://localhost:3333"
+claude
+```
+
+**That's it!** Start using Claude Code with free Chutes GLM models.
+
+---
+
+## Local Development Setup
 
 1. **Install dependencies**
    ```bash

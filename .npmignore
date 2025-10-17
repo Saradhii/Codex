@@ -1,0 +1,48 @@
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Git files
+.git
+.gitignore
+.gitattributes
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Test files
+test-*.js
+*.test.js
+*.spec.js
+
+# Documentation (keeping README.md)
+RESEARCH.md
+TESTING-GUIDE.md
+TEST-RESULTS.md
+IMPLEMENTATION-SUMMARY.md
+GIT-READY.md
+QUICK-START.md
+
+# Claude Code config
+.claude/
+
+# Node modules
+node_modules/
+
+# Build artifacts
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+Thumbs.db
+
+# Misc
+.npmrc
