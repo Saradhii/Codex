@@ -351,17 +351,15 @@ ${colors.bright}Logs:${colors.reset}
 
   // Animated ASCII art signature
   const asciiLines = [
-    `${colors.yellow}✨${colors.reset} ${colors.magenta}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${colors.reset} ${colors.yellow}✨${colors.reset}`,
-    `   ${colors.magenta}┃${colors.reset}  ${colors.yellow}⚡${colors.reset} ${colors.bright}Built by:${colors.reset}                                                    ${colors.magenta}┃${colors.reset}`,
-    `   ${colors.magenta}┃${colors.reset}                                                                ${colors.magenta}┃${colors.reset}`,
-    `   ${colors.magenta}┃${colors.reset}   ${colors.cyan}${colors.bright}                             .___.__    .__${colors.reset}                ${colors.magenta}┃${colors.reset}`,
-    `   ${colors.magenta}┃${colors.reset}   ${colors.cyan}${colors.bright} ___________ ____________     __| _/|  |__ |__|${colors.reset}        ${colors.magenta}┃${colors.reset}`,
-    `   ${colors.magenta}┃${colors.reset}   ${colors.cyan}${colors.bright}/  ___/\\__  \\_  __ \\__  \\   / __ | |  |  \\|  |${colors.reset}        ${colors.magenta}┃${colors.reset}`,
-    `   ${colors.magenta}┃${colors.reset}   ${colors.cyan}${colors.bright}\\___ \\  / __ \\|  | \\// __ \\_/ /_/ | |   Y  \\  |${colors.reset}       ${colors.magenta}┃${colors.reset}`,
-    `   ${colors.magenta}┃${colors.reset}   ${colors.cyan}${colors.bright}/____  >(____  /__|  (____  /\\____ | |___|  /__|${colors.reset}       ${colors.magenta}┃${colors.reset}`,
-    `   ${colors.magenta}┃${colors.reset}   ${colors.cyan}${colors.bright}     \\/      \\/           \\/      \\/      \\/    ${colors.reset}       ${colors.magenta}┃${colors.reset}`,
-    `   ${colors.magenta}┃${colors.reset}                                                                ${colors.magenta}┃${colors.reset}`,
-    `${colors.yellow}✨${colors.reset} ${colors.magenta}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${colors.reset} ${colors.yellow}✨${colors.reset}`,
+    ``,
+    `${colors.yellow}⚡${colors.reset} ${colors.bright}Built by:${colors.reset}`,
+    ``,
+    `${colors.cyan}${colors.bright}                                 .___.__    .__${colors.reset}`,
+    `${colors.cyan}${colors.bright} ___________ ____________     __| _/|  |__ |__|${colors.reset}`,
+    `${colors.cyan}${colors.bright}/  ___/\\__  \\_  __ \\__  \\   / __ | |  |  \\|  |${colors.reset}`,
+    `${colors.cyan}${colors.bright}\\___ \\  / __ \\|  | \\// __ \\_/ /_/ | |   Y  \\  |${colors.reset}`,
+    `${colors.cyan}${colors.bright}/____  >(____  /__|  (____  /\\____ | |___|  /__|${colors.reset}`,
+    `${colors.cyan}${colors.bright}     \\/      \\/           \\/      \\/      \\/    ${colors.reset}`,
     ``
   ];
 
